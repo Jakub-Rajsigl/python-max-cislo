@@ -1,15 +1,16 @@
-from pathlib import Path
+import os
 
-file_path = Path(__file__).with_name("poku.txt")
+with open(os.sep.join(["python-max-cislo", "poku.txt"])) as soubor:
+    radky = soubor.readlines()
 
-with file_path.open("r", encoding="utf-8") as soubor:
-    cisla = []
-    for radek in soubor:
-        radek = radek.strip()
-        if radek:
-            cisla.append(int(radek))
+if len(radky) <= 0:
+    print("Soubor je prázdný!")
+    exit()
 
-if cisla:
-    print(max(cisla))
-else:
-    print("Soubor neobsahuje žádné číslo.")
+max = int(radky[0].strip())
+for radek in radky:
+    cislo = int(radek.strip())
+    if cislo > max:
+        max = cislo
+
+print(f"Nejvyšší hodnota v souboru je: {max}")
